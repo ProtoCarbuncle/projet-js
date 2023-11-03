@@ -4,11 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  // React States
+  
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // User Login info
+  // Info login
   const database = [
     {
       username: "Teo",
@@ -26,29 +26,27 @@ function App() {
   };
 
   const handleSubmit = (event) => {
-    //Prevent page reload
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
 
-    // Find user login info
     const userData = database.find((user) => user.username === uname.value);
 
-    // Compare user info
+    // comparer les entrées avec la database
     if (userData) {
       if (userData.password !== pass.value) {
-        // Invalid password
+        // mot de passe invalide
         setErrorMessages({ name: "pass", message: errors.pass });
       } else {
         setIsSubmitted(true);
       }
     } else {
-      // Username not found
+      // mauvais pseudo
       setErrorMessages({ name: "uname", message: errors.uname });
     }
   };
 
-  // Generate JSX code for error message
+  // Message d'erreur
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
