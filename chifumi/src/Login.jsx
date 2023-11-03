@@ -14,7 +14,7 @@ export const Login = () => {
             <form onSubmit={handleLogin}>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
-                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="YourUsername" name="username" />
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Your Username" name="username" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
