@@ -28,8 +28,6 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    var { uname, pass } = document.forms[0];
-
     const userData = database.find((user) => user.username === uname.value);
 
     // comparer les entrées avec la database
