@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import './App.css'
 export const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = (e) => {    
         e.preventDefault();
-        console.log(email);
+        console.log(username);
     }
     
     return (
         <>
             <form onSubmit={handleLogin}>
-                <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" name="email" />
-                <label htmlFor="password">password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" name="password" />
+                <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="YourUsername" name="username" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="Password" placeholder="Password" name="password" />
+                </div>
                 <button type="submit">Login</button>
             </form>
             <button>Don&apos;t have an account? Register here.</button>
