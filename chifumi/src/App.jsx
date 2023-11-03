@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  
+
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -21,8 +21,8 @@ function App() {
   ];
 
   const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
+    uname: "Ptdr t ki ?",
+    pass: "Mauvais mdp"
   };
 
   const handleSubmit = (event) => {
@@ -52,17 +52,17 @@ function App() {
       <div className="error">{errorMessages.message}</div>
     );
 
-  // JSX code for login form
+
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
+          <label>Pseudo </label>
           <input type="text" name="uname" required />
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
-          <label>Password </label>
+          <label>Mot de passe </label>
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
@@ -77,7 +77,7 @@ function App() {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        {isSubmitted ? <div>Bien joué t'es connecté</div> : renderForm}
       </div>
     </div>
   );
