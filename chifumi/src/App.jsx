@@ -57,12 +57,12 @@ function App() {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Pseudo </label>
+          <label>Pseudos</label>
           <input type="text" name="uname" required />
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
-          <label>Mot de passe </label>
+          <label>MdPasse</label>
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
