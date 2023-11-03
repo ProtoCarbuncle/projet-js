@@ -1,19 +1,12 @@
 {
-  "posts": [
+  "login": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "username": "Teo",
+      "password": "Suce"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "username": "Matisse",
+      "password" : "sucré au sucre"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
