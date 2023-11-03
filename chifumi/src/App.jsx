@@ -76,7 +76,7 @@ function App() {
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">T'es connecté</div>
+        <div className="title">Sign In</div>
         {isSubmitted ? <div>Bien joué t'es connecté</div> : renderForm}
       </div>
     </div>
