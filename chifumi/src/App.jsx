@@ -4,7 +4,7 @@ import './App.css';
 
 import db from './db.json';
 
-export const Login = () => {
+export const App = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -49,4 +49,4 @@ export const Login = () => {
     );
 }
 
-export default Login;
+export default App;
