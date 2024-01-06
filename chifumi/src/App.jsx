@@ -1,86 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import './App.css';
 
-function App() {
+import db from './db.json';
 
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+export const Login = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
 
-  // Info login
-  const database = [
-    {
-      username: "Teo",
-      password: "Oui"
-    },
-    {
-      username: "Matisse",
-      password: "todi"
-    },
-  ];
+    const handleLogin = (e) => {    
+        e.preventDefault();
 
-  const errors = {
-    uname: "Ptdr t ki ?",
-    pass: "Mauvais mdp"
-  };
+        const user = db.login.find((user) => user.username === username && user.password === password);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const { uname, pass } = event.target.elements;
-
-    const userData = database.find((user) => user.username === uname.value);
-
-    // comparer les entrées avec la database
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // mot de passe invalide
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // mauvais pseudo
-      setErrorMessages({ name: "uname", message: errors.uname });
+        if (user) {
+            console.log("T'es bien connecté chacal");
+        } else {
+            if (username !== "Ptdr t ki ?") {
+                setErrorMessage("Ptdr t ki ?");
+            } else if (password !== "Comment ça mon reuf ?") {
+                setErrorMessage("Comment ça mon reuf ?");
+            }
+        }
     }
-  };
 
-  // Message d'erreur
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
+    const handleRedirect = () => {
+        history.push('/create-account');
+    }
+    
+    return (
+        <>
+            <form onSubmit={handleLogin}>
+                <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Your Username" name="username" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="Password" placeholder="Password" name="password" />
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            {errorMessage && <p>{errorMessage}</p>}
+            <button onClick={handleRedirect}>Don&apos;t have an account? Register here.</button>
+        </>
     );
-
-
-  const renderForm = (
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label>Pseudos</label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
-        </div>
-        <div className="input-container">
-          <label>MdPasse</label>
-          <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
-        </div>
-        <div className="button-container">
-          <input type="submit" />
-        </div>
-      </form>
-    </div>
-  );
-
-  return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title">LogIn</div>
-        {isSubmitted ? <div>Bien joué t'es connecté</div> : renderForm}
-      </div>
-    </div>
-  );
 }
 
-export default App;
+export default Login;

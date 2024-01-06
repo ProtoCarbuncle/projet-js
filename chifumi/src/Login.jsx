@@ -1,12 +1,33 @@
 import { useState } from 'react';
-import './App.css'
+import { useHistory } from 'react-router-dom';
+import './App.css';
+
+import db from './db.json';
+
 export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
 
     const handleLogin = (e) => {    
         e.preventDefault();
-        console.log(username);
+
+        const user = db.login.find((user) => user.username === username && user.password === password);
+
+        if (user) {
+            console.log("T'es bien connecté chacal");
+        } else {
+            if (username !== "Ptdr t ki ?") {
+                setErrorMessage("Ptdr t ki ?");
+            } else if (password !== "Comment ça mon reuf ?") {
+                setErrorMessage("Comment ça mon reuf ?");
+            }
+        }
+    }
+
+    const handleRedirect = () => {
+        history.push('/create-account');
     }
     
     return (
@@ -22,7 +43,8 @@ export const Login = () => {
                 </div>
                 <button type="submit">Login</button>
             </form>
-            <button>Don&apos;t have an account? Register here.</button>
+            {errorMessage && <p>{errorMessage}</p>}
+            <button onClick={handleRedirect}>Don&apos;t have an account? Register here.</button>
         </>
     );
 }
