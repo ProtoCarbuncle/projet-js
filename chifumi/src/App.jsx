@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './App.css';
 
-import db from './db.json';
+import db from '../db.json';
 
 export const App = () => {
     const [username, setUsername] = useState('');
