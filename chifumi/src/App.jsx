@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './App.css';
-
-import db from '../db.json';
+import database from '../db.json';
 
 export const App = () => {
     const [username, setUsername] = useState('');
@@ -13,10 +12,11 @@ export const App = () => {
     const handleLogin = (e) => {    
         e.preventDefault();
 
-        const user = db.login.find((user) => user.username === username && user.password === password);
+        const user = database.login.find((user) => user.username === username && user.password === password);
 
         if (user) {
             console.log("T'es bien connecté chacal");
+            history.push('/profile'); // Redirect to Profile.jsx
         } else {
             if (username !== "Ptdr t ki ?") {
                 setErrorMessage("Ptdr t ki ?");
@@ -34,17 +34,17 @@ export const App = () => {
         <>
             <form onSubmit={handleLogin}>
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">Pseudo</label>
                     <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Your Username" name="username" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Mot de passe super secret</label>
                     <input value={password} onChange={(e) => setPassword(e.target.value)} type="Password" placeholder="Password" name="password" />
                 </div>
                 <button type="submit">Login</button>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
-            <button onClick={handleRedirect}>Don&apos;t have an account? Register here.</button>
+            <button onClick={handleRedirect}>Pas de compte ? On te mets bien</button>
         </>
     );
 }
