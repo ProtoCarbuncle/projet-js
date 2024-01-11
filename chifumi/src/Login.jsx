@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -6,16 +7,16 @@ const Login = () => {
 
     const handleUsername = (e) => {
         setUsername(e.target.value);
-      };
+    };
 
-      const handlePassword = (e) => {
+    const handlePassword = (e) => {
         setPassword(e.target.value);
-      };
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
 
-        if (username === "" || password === "") {
+        if (username.trim() === "" || password.trim() === "") {
             setErrorMessage("Eh oh, tu peux pas laisser des champs vides");
             return;
         }
@@ -31,6 +32,14 @@ const Login = () => {
             }
         }
     };
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setErrorMessage("");
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [errorMessage]);
 
     return (
         <div className="app-container">
