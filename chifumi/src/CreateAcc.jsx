@@ -1,78 +1,88 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./App.css";
 const CreateAcc = () => {
-    const history = useHistory();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [accountCreated, setAccountCreated] = useState(false);
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [accountCreated, setAccountCreated] = useState(false);
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
 
-    const handleCreateAccount = () => {
-        // Vérifier si le nom d'utilisateur existe déjà dans db.json
-        fetch('../db.json')
-            .then(response => response.json())
-            .then(data => {
-                const existingUser = data.login.find(user => user.username === username);
-                if (existingUser) {
-                    setErrorMessage("T'as déjà un compte chacal");
-                } else {
-                    // Faire une requete vers le serveur pour mettre à jour db.json
-                    fetch('/api/createAccount', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ username, password })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Gérer la réponse du serveur
-                        console.log(data);
-                        setAccountCreated(true);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-    const handleReturnToLogin = () => {
-        history.push('/login');
-    };
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
 
-    return (
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+
+    if (!username) {
+      setErrorMessage("Bah alors, tu sais pas comment tu t'appelles ?");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Oulaaaaaah réécris bien ton mdp mon grand");
+      return;
+      
+    }
+    if (!password) {
+      setErrorMessage("T'as oublié ton mdp avant même d'en faire un ?");
+      return;
+    }
+    try {
+      const token = await registerUser(username, password);
+      if (token) {
+        console.log("Ça y est, t'es dans la matrice");
+        setAccountCreated(true);
+        navigate("/Login");
+      }
+    } catch (error) {
+      console.error("On a eu un problème derrière, on regle ça bg", error);
+      setErrorMessage("On a eu un problème derrière, on regle ça bg");
+    }
+  };
+
+  return (
+    <div className="app-container">
+      <h1>Création d'un compte sucré au sucre</h1>
+      {errorMessage && <p>{errorMessage}</p>}
+      {accountCreated ? (
         <div>
-            <h1>Création de compte sucré au sucre</h1>
-            {errorMessage && <p>{errorMessage}</p>}
-            {accountCreated ? (
-                <div>
-                    <p>Compte sucré au sucre créé</p>
-                    <button onClick={handleReturnToLogin}>Retour au login</button>
-                </div>
-            ) : (
-                <div>
-                    <label htmlFor="username">Pseudal :</label>
-                    <input type="text" id="username" value={username} onChange={handleUsernameChange} />
-                    <label htmlFor="password">Mot de passe super secret :</label>
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-                    <button onClick={handleCreateAccount}>Créer mon compte</button>
-                </div>
-            )}
+          <p>T'es rentré dans la légende</p>
+          <button type="submit"><a href="/Login" className="button">Retourner au login</a></button>
         </div>
-    );
+      ) : (
+        <form onSubmit={handleSubmit} className="form">
+          <div>
+            <label >Pseudo : </label>
+            <input type="text" value={username} onChange={handleUsernameChange} placeholder="Choisi bien bg"/>
+          </div>
+          <div>
+            <label>Mot de passe : </label>
+            <input type="password" value={password} onChange={handlePasswordChange} placeholder="Tu le dis à personne hein ?"/>
+          </div>
+          <div>
+            <label>Confirme ton mot de passe : </label>
+            <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="T'as déjà oublié ?"/>
+          </div>
+          <div className="button-container">
+            <button type="submit">Entrer dans la légende</button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
 };
-
 export default CreateAcc;

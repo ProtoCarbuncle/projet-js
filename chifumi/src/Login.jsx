@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import './App.css';
+import React, { useState } from "react";
+const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-import db from '../db.json';
+    const handleUsername = (e) => {
+        setUsername(e.target.value);
+      };
 
-export const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const history = useHistory();
+      const handlePassword = (e) => {
+        setPassword(e.target.value);
+      };
 
-    const handleLogin = (e) => {    
+    const handleLogin = (e) => {
         e.preventDefault();
 
-        const user = db.login.find((user) => user.username === username && user.password === password);
+        if (username === "" || password === "") {
+            setErrorMessage("Eh oh, tu peux pas laisser des champs vides");
+            return;
+        }
 
         if (user) {
             console.log("T'es bien connecté chacal");
+            history.push("/profile");
         } else {
             if (username !== "Ptdr t ki ?") {
                 setErrorMessage("Ptdr t ki ?");
@@ -24,28 +30,29 @@ export const Login = () => {
                 setErrorMessage("Comment ça mon reuf ?");
             }
         }
-    }
+    };
 
-    const handleRedirect = () => {
-        history.push('/create-account');
-    }
-    
     return (
-        <>
-            <form onSubmit={handleLogin}>
+        <div className="app-container">
+            <h1>Le jeu le plus sucré au sucre</h1>
+            <form className="form" onSubmit={handleLogin}>
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Your Username" name="username" />
+                    <label htmlFor="username">Pseudo : </label>
+                    <input value={username} onChange={handleUsername} type="text" placeholder="Ton magnifique pseudo ici" name="username" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="Password" placeholder="Password" name="password" />
+                    <label htmlFor="password">Mot de passe super secret : </label>
+                    <input value={password} onChange={handlePassword} type="password" placeholder="Chuuuuuuut" name="password" />
                 </div>
-                <button type="submit">Login</button>
+                <div className="button-container">
+                    <button type="submit">Login</button>
+                </div>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
-            <button onClick={handleRedirect}>Don&apos;t have an account? Register here.</button>
-        </>
+            <div className="button-container">
+                <button><a href="/CreateAcc" className="button">Pas de compte ? On te mets bien</a></button>
+            </div>
+        </div>
     );
 }
 
