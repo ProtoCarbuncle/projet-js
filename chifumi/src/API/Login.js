@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://fauques.freeboxos.fr:3000';
-
 export async function loginUser(username, password) {
   try {
-    const response = await axios.post(`${API_URL}/Login`, { username, password });
+    const response = await axios.post(`http://fauques.freeboxos.fr:3000/Login`, { username, password });
     if (response.data.token) {
       saveUserCredentials(response.data.token, username);
       return { status: 'success', data: response.data };

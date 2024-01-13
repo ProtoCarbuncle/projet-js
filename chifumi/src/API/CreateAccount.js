@@ -1,11 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const API_URL = 'http://fauques.freeboxos.fr:3000';
-
 export async function registerUser(username, password) {
   const idUser = uuidv4();
  
-    const response = await fetch(`${API_URL}/createAcc`, {
+    const response = await fetch('http://fauques.freeboxos.fr:3000/createAcc', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
