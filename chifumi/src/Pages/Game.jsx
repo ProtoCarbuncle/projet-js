@@ -33,11 +33,34 @@ const Game = () => {
             setResultat('Tu perds !');
             setScoreAdversaire(scoreAdversaire + 1);
         }
-
-        if (scoreJoueur === 3 || scoreAdversaire === 3) {
+    
+        // Vérifie si un joueur a atteint 3 points
+        if (scoreJoueur + 1 === 3) {
+            setScoreJoueur(scoreJoueur + 1);
             setJeuTermine(true);
-            setResultat(scoreJoueur === 3 ? 'Félicitations, tu as gagné la partie !' : 'Dommage, tu as perdu la partie.');
+            setResultat('Félicitations, tu as gagné la partie !');
+        } else if (scoreAdversaire + 1 === 3) {
+            setScoreAdversaire(scoreAdversaire + 1);
+            setJeuTermine(true);
+            setResultat('Dommage, tu as perdu la partie.');
+        } else {
+            if (joueur === 'pierre' && adversaire === 'ciseaux' ||
+                joueur === 'ciseaux' && adversaire === 'papier' ||
+                joueur === 'papier' && adversaire === 'pierre') {
+                setScoreJoueur(scoreJoueur + 1);
+            } else if (joueur !== adversaire) {
+                setScoreAdversaire(scoreAdversaire + 1);
+            }
         }
+};
+    
+    const recommencerJeu = () => {
+        setChoixJoueur(null);
+        setChoixAdversaire(null);
+        setScoreJoueur(0); // Réinitialise le score du joueur
+        setScoreAdversaire(0); // Réinitialise le score de l'adversaire
+        setResultat('');
+        setJeuTermine(false);
     };
 
     return (
@@ -56,7 +79,8 @@ const Game = () => {
                 <p>{resultat}</p>
                 <p>Score : {scoreJoueur} - {scoreAdversaire}</p>
                 <div className="button-container">
-                    <button><a href="/Profile">Quitter la partie ?</a></button>
+                <button onClick={recommencerJeu}>Recommencer la partie</button>
+                <button><a href="/Profile">Quitter la partie ?</a></button>
                 </div>
             </div>
 
