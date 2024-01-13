@@ -8,7 +8,7 @@ const Profile = () => {
             <p>Voici un petit récapitulatif des règles pour les petits nouveaux :</p>
             <img src={rockScissorsPaperRules} alt="Rock Paper Scissors SVG" />
             <p>Alors, prêt à te la donner ?</p>
-            <button><a href="/HistoMatch">Jouer</a></button>
+            <button><a href="/Game">Jouer</a></button>
             <button><a href="/">Se déconnecter</a></button>
         </div>
     );
