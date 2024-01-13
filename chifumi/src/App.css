@@ -17,7 +17,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f4c03d; /* Fond plus clair */
+  background-color: #f49c3d; /* Fond plus clair */
 }
 
 .form {
@@ -26,7 +26,7 @@ body {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #212247;
+  background-color: #3cb59d;
   display: flex;
   flex-direction: column;
   align-items: center;
