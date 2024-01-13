@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const API_URL = 'http://fauques.freeboxos.fr:3000/createAccount';
+const API_URL = 'http://fauques.freeboxos.fr:3000';
 
 export async function registerUser(username, password) {
   const idUser = uuidv4();
-  try {
-    const response = await fetch(`${API_URL}/register`, {
+ 
+    const response = await fetch(`${API_URL}/createAcc`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -18,8 +18,4 @@ export async function registerUser(username, password) {
     } else {
       throw new Error('Erreur lors de la création du compte');
     }
-  } catch (error) {
-    console.error('Erreur lors de la création du compte:', error);
-    return { status: 'Error', message: error.message };
-  }
 }
