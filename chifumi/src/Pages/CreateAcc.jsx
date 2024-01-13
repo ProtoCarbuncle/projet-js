@@ -32,7 +32,6 @@ const CreateAcc = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-
     if (!username) {
       setErrorMessage("Bah alors, tu sais pas comment tu t'appelles ?");
       return;
@@ -41,11 +40,14 @@ const CreateAcc = () => {
     if (password !== confirmPassword) {
       setErrorMessage("Oulaaaaaah réécris bien ton mdp mon grand");
       return;
-      
     }
+
     if (!password) {
       setErrorMessage("T'as oublié ton mdp avant même d'en faire un ?");
       return;
+    }else {
+      console.log("Ça y est, t'es dans la matrice");
+      setAccountCreated(true);
     }
   };
 
@@ -63,7 +65,7 @@ const CreateAcc = () => {
           <>
             <form onSubmit={handleSubmit} className="form">
               <div>
-                <label >Pseudo : </label>
+                <label>Pseudo : </label>
                 <input type="text" value={username} onChange={handleUsernameChange} placeholder="Choisi bien bg"/>
               </div>
               <div>
@@ -87,4 +89,5 @@ const CreateAcc = () => {
     </>
   );
 };
+
 export default CreateAcc;
