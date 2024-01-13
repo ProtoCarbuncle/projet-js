@@ -23,9 +23,10 @@ npm run dev
 Lancer le Serveur Backend
 Et pour que la magie opère côté serveur, faites ceci :
 
-``
+```shell
 cd chifumi
-``````shell
+```
+```shell
 cd chifoumi-server-main
 ```
 ```shell
