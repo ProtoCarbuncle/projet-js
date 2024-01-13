@@ -60,11 +60,12 @@ function Login() {
                     <div className="button-container">
                         <button type="submit">Login</button>
                     </div>
-                </form>
-                {errorMessage && <p>{errorMessage}</p>}
+                    {errorMessage && <p>{errorMessage}</p>}
                 <div className="button-container">
                     <button><a href="/CreateAcc">Pas de compte ? On te mets bien</a></button>
                 </div>
+                </form>
+                
             </div>
         </>
     );
