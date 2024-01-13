@@ -17,8 +17,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9; /* Fond plus clair */
+  background-color: #f4c03d; /* Fond plus clair */
 }
 
 .form {
@@ -33,8 +32,7 @@ body {
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: #ffffff; /* Fond clair pour le formulaire */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+  
 }
 
 .button-container {
