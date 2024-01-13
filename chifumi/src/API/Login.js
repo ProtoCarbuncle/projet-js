@@ -8,10 +8,25 @@ export async function loginUser(username, password) {
       return { status: 'success', data: response.data };
     } else {
       console.error('Login failed with response:', response.data);
-      throw new Error('Login failed: Token not present in the response');
+      throw new Error('Login failed');
     }
   } catch (error) {
     console.error('Login error:', error.response ? error.response.data : error);
+    return { status: 'error', message: error.message };
+  }
+}
+
+export async function registerUser(username, password) {
+  const idUser = uuidv4();
+  try {
+    const response = await axios.post(`http://fauques.freeboxos.fr:3000}/register`, { id_: idUser, username, password });
+    if (response.data.success) {
+      return { status: 'success', data: response.data };
+    } else {
+      throw new Error('Registration failed');
+    }
+  } catch (error) {
+    console.error('Registration error:', error);
     return { status: 'error', message: error.message };
   }
 }

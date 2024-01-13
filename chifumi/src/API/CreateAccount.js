@@ -1,13 +1,17 @@
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function registerUser(username, password) {
   const idUser = uuidv4();
- 
-  const response = await fetch('http://fauques.freeboxos.fr:3000/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id_: idUser, username, password }),
-  });
+  try {
+    const response = await axios.post(`http://fauques.freeboxos.fr:3000/register`, { id_: idUser, username, password });
+    if (response.data.success) {
+      return { status: 'success', data: response.data };
+    } else {
+      throw new Error('Registration failed');
+    }
+  } catch (error) {
+    console.error('Registration error:', error);
+    return { status: 'error', message: error.message };
+  }
 }

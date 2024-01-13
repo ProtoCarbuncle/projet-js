@@ -32,22 +32,28 @@ const CreateAcc = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!username) {
-      setErrorMessage("Bah alors, tu sais pas comment tu t'appelles ?");
-      return;
-    }
+    try {
+      if (!username) {
+        throw new Error("Bah alors, tu sais pas comment tu t'appelles ?");
+      }
 
-    if (password !== confirmPassword) {
-      setErrorMessage("Oulaaaaaah réécris bien ton mdp mon grand");
-      return;
-    }
+      if (password !== confirmPassword) {
+        throw new Error("Oulaaaaaah réécris bien ton mdp mon grand");
+      }
+      
+      if (!password) {
+        throw new Error("T'as oublié ton mdp avant même d'en faire un ?");
+      }
 
-    if (!password) {
-      setErrorMessage("T'as oublié ton mdp avant même d'en faire un ?");
-      return;
-    }else {
-      console.log("Ça y est, t'es dans la matrice");
-      setAccountCreated(true);
+      const token = await registerUser(username, password);
+      if (token) {
+        console.log("Ça y est, t'es dans la matrice");
+        setAccountCreated(true);
+      }
+    } catch (error) {
+      console.error("On a eu un problème derrière, on regle ça bg", error);
+      setErrorMessage(error.message);
+      setAccountCreated(false); // Set accountCreated to false when there's an error
     }
   };
 
@@ -56,7 +62,7 @@ const CreateAcc = () => {
       <div className="app-container">
         <h1>Création d'un compte sucré au sucre</h1>
         {errorMessage && <p>{errorMessage}</p>}
-        {accountCreated ? (
+        {!errorMessage && accountCreated ? (
           <div>
             <p>T'es rentré dans la légende</p>
             <button type="submit"><a href="/" className="button">Aller se connecter</a></button>
@@ -65,7 +71,7 @@ const CreateAcc = () => {
           <>
             <form onSubmit={handleSubmit} className="form">
               <div>
-                <label>Pseudo : </label>
+                <label >Pseudo : </label>
                 <input type="text" value={username} onChange={handleUsernameChange} placeholder="Choisi bien bg"/>
               </div>
               <div>
@@ -89,5 +95,4 @@ const CreateAcc = () => {
     </>
   );
 };
-
 export default CreateAcc;
