@@ -1,8 +1,13 @@
+Projet Chi Fou Mi
+
 #Pour un bon déroulement du programme
 
-Lancer le npm run dev :
-Ouvrir le dossier dans VSCode
-Ouvrir un terminal
+Objectif du Projet : 
+- Le but est de créer projet Chi Fou Mi. C'est un jeu en ligne où deux joueurs s'affrontent sur trois manches. Cool, non ?
+
+Démarrer le Frontend : 
+Ouvrez le dossier dans VSCode, lancez un terminal et suivez ces étapes :
+
 ```shell
 cd chifumi
 ```
@@ -15,12 +20,12 @@ npm audit fix
 ```shell
 npm run dev
 ```
+Lancer le Serveur Backend
+Et pour que la magie opère côté serveur, faites ceci :
 
-Pour lancer le serveur :
-```shell
+``
 cd chifumi
-```
-```shell
+``````shell
 cd chifoumi-server-main
 ```
 ```shell
@@ -29,3 +34,10 @@ cd functions
 ```shell
 docker compose up
 ```
+
+Authentification et API
+On utilise des tokens JWT pour l'authentification. Voici quelques endpoints clés :
+
+/register pour s'inscrire.
+/login pour se connecter.
+/matches pour créer et lister les parties.
