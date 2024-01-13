@@ -17,6 +17,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9; /* Fond plus clair */
 }
 
 .form {
@@ -30,14 +32,23 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: none;
+  background-color: #ffffff; /* Fond clair pour le formulaire */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .button-container {
   margin-top: 1em;
+  display: flex;
+  justify-content: space-between; /* Espacement entre les boutons */
 }
 
 .form label {
   display: block;
   margin-bottom: 0.5em;
   margin-top: 1em; /* Add margin-top to create spacing */
+}
+button:hover {
+  background-color: #535bf2; /* Changement de couleur au survol */
+  transition: background-color 0.3s; /* Transition fluide */
 }
