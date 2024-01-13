@@ -47,16 +47,6 @@ const CreateAcc = () => {
       setErrorMessage("T'as oublié ton mdp avant même d'en faire un ?");
       return;
     }
-    try {
-      const token = await registerUser(username, password);
-      if (token) {
-        console.log("Ça y est, t'es dans la matrice");
-        setAccountCreated(true);
-      }
-    } catch (error) {
-      console.error("On a eu un problème derrière, on regle ça bg", error);
-      setErrorMessage("On a eu un problème derrière, on regle ça bg");
-    }
   };
 
   return (
