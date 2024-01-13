@@ -16,21 +16,6 @@ export async function loginUser(username, password) {
   }
 }
 
-export async function registerUser(username, password) {
-  const idUser = uuidv4();
-  try {
-    const response = await axios.post(`http://fauques.freeboxos.fr:3000}/register`, { id_: idUser, username, password });
-    if (response.data.success) {
-      return { status: 'success', data: response.data };
-    } else {
-      throw new Error('Registration failed');
-    }
-  } catch (error) {
-    console.error('Registration error:', error);
-    return { status: 'error', message: error.message };
-  }
-}
-
 function saveUserCredentials(token, username) {
   localStorage.setItem('userToken', token);
   localStorage.setItem('username', username);
