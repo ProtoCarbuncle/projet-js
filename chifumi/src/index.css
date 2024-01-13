@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
   color: #213547; /* Couleur de texte plus foncée */
-  background-color: #f4c03d; /* Fond clair */
+  background-color: #f49c3d;; /* Fond clair */
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -31,7 +31,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f4c03d; 
+  background-color: #f49c3d;; 
 }
 
 h1 {
